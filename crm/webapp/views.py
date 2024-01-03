@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
+from .models import Customer
 
 def home(request):
     return  render(request, 'webapp/index.html')
@@ -35,3 +36,38 @@ def login(request):
                 return redirect("dashboard")
     context = {'form':form}
     return render(request, 'webapp/login.html', context=context)
+
+# - Dashboard
+
+@login_required(login_url='login')
+def dashboard(request):
+
+    customers = Customer.objects.all()
+
+    context = {'customers': customers}
+
+    return render(request, 'webapp/dashboard.html', context=context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#logout
+def logout(request):
+
+    auth.logout(request)
+
+    messages.success(request, "Logout success!")
+
+    return redirect("login")
