@@ -6,11 +6,11 @@
 
     <hr>
 
-    {% comment %} <a class="btn btn-outline-primary btn-sm" href="{% url 'create-customer' %}">
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'create-customer' %}">
 
-        Create a new record &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Create a new customer &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
 
-    </a> {% endcomment %}
+    </a> 
 
     <hr> 
 
@@ -59,7 +59,7 @@
 
                 <td> {{customer.created_at}} </td>
 
-                {% comment %} <td> <a class="btn btn-success btn-sm" href="{% url 'record' record.id %}"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </td> {% endcomment %}
+                <td> <a class="btn btn-success btn-sm" href="{% url 'single-customer' customer.id %}"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </td>
 
             </tr>
 

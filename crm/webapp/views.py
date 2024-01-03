@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, CreateCustomerForm, UpdateCustomerForm
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import auth
@@ -48,12 +48,42 @@ def dashboard(request):
 
     return render(request, 'webapp/dashboard.html', context=context)
 
+@login_required(login_url='login')
+def create_customer(request):
+    form = CreateCustomerForm()
+    if request.method == "POST":
+        form = CreateCustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your customer was created!")
+            return redirect("dashboard")
+    context = {'form': form}
+    return render(request, 'webapp/create-customer.html', context=context)
 
 
+# - Update a record 
+
+@login_required(login_url='login')
+def update_customer(request, pk):
+    record = Customer.objects.get(id=pk)
+    form = UpdateCustomerForm(instance=record)
+    if request.method == 'POST':
+        form = UpdateCustomerForm(request.POST, instance=record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your customer was updated!")
+            return redirect("dashboard")      
+    context = {'form':form}
+    return render(request, 'webapp/update-customer.html', context=context)
 
 
+# - Read / View a singular record
 
-
+@login_required(login_url='login')
+def single_customer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    context = {'customer':customer}
+    return render(request, 'webapp/view-customer.html', context=context)
 
 
 
