@@ -86,7 +86,14 @@ def single_customer(request, pk):
     return render(request, 'webapp/view-customer.html', context=context)
 
 
+# - Delete a record
 
+@login_required(login_url='login')
+def delete_customer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    customer.delete()
+    messages.success(request, "Your customer was deleted!")
+    return redirect("dashboard")
 
 
 

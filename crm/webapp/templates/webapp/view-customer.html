@@ -25,7 +25,7 @@
 
             <p> <strong> Address: </strong> {{customer.address}} </p>
             <p> <strong> City: </strong> {{customer.city}} </p>
-            <p> <strong> State: </strong> {{customer.province}} </p>
+            <p> <strong> State: </strong> {{customer.state}} </p>
             <p> <strong> Country: </strong> {{customer.country}} </p>
 
             <p> <strong> Creation date: </strong> {{customer.creation_date}} </p>
@@ -36,6 +36,6 @@
     &nbsp;
     <a href="{% url 'update-customer' customer.id %}" class="btn btn-info"> Update customer &nbsp; <i class="fa fa-plus" aria-hidden="true"></i> </a>
     &nbsp;
-    {% comment %} <a href="{% url 'delete-customer' customer.id %}" class="btn btn-danger"> Delete &nbsp;<i class="fa fa-minus-square" aria-hidden="true"></i> </a> {% endcomment %}
+    <a href="{% url 'delete-customer' customer.id %}" class="btn btn-danger"> Delete &nbsp;<i class="fa fa-minus-square" aria-hidden="true"></i> </a>
 {% endblock %}
 
